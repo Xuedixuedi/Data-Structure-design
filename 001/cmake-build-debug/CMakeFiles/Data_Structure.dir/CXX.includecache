@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/xuedixuedi/lxdThings/Code/github/Data-Structure-design/001/LinkList.h
+Node.h
+/Users/xuedixuedi/lxdThings/Code/github/Data-Structure-design/001/Node.h
+
+/Users/xuedixuedi/lxdThings/Code/github/Data-Structure-design/001/Node.h
+iostream
+-
+string
+-
+
+/Users/xuedixuedi/lxdThings/Code/github/Data-Structure-design/001/main.cpp
+Node.h
+/Users/xuedixuedi/lxdThings/Code/github/Data-Structure-design/001/Node.h
+LinkList.h
+/Users/xuedixuedi/lxdThings/Code/github/Data-Structure-design/001/LinkList.h
+
