@@ -1,0 +1,3 @@
+/Users/xuedixuedi/lxdThings/Code/github/Data-Structure-design/002/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/xuedixuedi/lxdThings/Code/github/Data-Structure-design/002/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/xuedixuedi/lxdThings/Code/github/Data-Structure-design/002/cmake-build-debug/CMakeFiles/002.dir
