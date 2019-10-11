@@ -10,8 +10,8 @@ int main() {
     int t = 2;//
     int num = 0;//节点数据
     Node *tNode;
-    LinkList *s1 = new LinkList;
-    LinkList *s2 = new LinkList;
+    auto *s1 = new LinkList;
+    auto *s2 = new LinkList;
 
 
     while (1) {
@@ -42,7 +42,7 @@ int main() {
 
 LinkList *intersection(LinkList *s1, LinkList *s2) {
     Node *tNode;
-    LinkList *s3 = new LinkList;
+    auto *s3 = new LinkList;
     auto p1 = s1->header->next, p2 = s2->header->next;
     while (p1 != s1->trailer && p2 != s2->trailer) {
         if (p1->getNum() == p2->getNum()) {

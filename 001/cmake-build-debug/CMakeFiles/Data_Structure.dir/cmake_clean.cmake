@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/Data_Structure.dir/main.cpp.o"
-  "Data_Structure.pdb"
   "Data_Structure"
+  "Data_Structure.pdb"
 )
 
 # Per-language clean rules from dependency scanning.
