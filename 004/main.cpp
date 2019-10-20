@@ -2,7 +2,7 @@
 #include <map>
 #include <queue>
 #include <stack>
-//#include "Stack.h"
+#include "Stack.h"
 
 using namespace std;
 
@@ -31,7 +31,7 @@ int main() {
     cin >> s;
 
     suffix = getSuffix(s);
-    while(!suffix.empty()){
+    while (!suffix.empty()) {
         cout << suffix.front();
         suffix.pop();
     }
@@ -43,13 +43,10 @@ queue<char> getSuffix(string s) {
     stack<char> op;//运算符栈
     for (auto it = s.begin(); it != s.end(); it++) {
         if (*it >= '0' && *it <= '9') {
-
             suffix.push(*it);
         } else if (*it == '(') {
-
             op.push(*it);
         } else if (*it == ')') {
-
             while (op.top() != '(') {
                 suffix.push(op.top());
                 op.pop();
@@ -57,21 +54,24 @@ queue<char> getSuffix(string s) {
             op.pop();//把左括号也出栈
         } else {
 
-            if (op.empty() || op.top() == '('){
-                cout << op.size()<< endl;
+            if (op.empty() || op.top() == '(') {
                 op.push(*it);
-            }
-
-            else {
-
+            } else {
                 while (cmp(op.top(), *it)) {
                     suffix.push(op.top());
                     op.pop();
+                    if (op.empty()) {
+                        break;
+                    }
                 }
-                op.push(*it);
 
+                op.push(*it);
             }
         }
+    }
+    while(!op.empty()){
+        suffix.push(op.top());
+        op.pop();
     }
     return suffix;
 }
