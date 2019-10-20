@@ -19,9 +19,11 @@ template<typename T>
 class Stack {
 private:
     Node<T> *head;//头指针
-    int _size;//栈的大小
+    int _size{};//栈的大小
 
 public:
+    Stack();
+
     int size();//返回栈的大小
     bool empty();//返回栈是否为空
     void push(T e);//插入一个元素
@@ -48,6 +50,7 @@ void Stack<T>::push(T e) {
     n->data = e;
     n->next = this->head->next;
     this->head->next = n;
+    this->_size++;
 }
 
 template<typename T>
@@ -57,12 +60,20 @@ void Stack<T>::pop() {
         head->next = head->next->next;
         delete p;
     }
+    this->_size--;
 }
 
 template<typename T>
 T Stack<T>::top() {
     if (!this->empty())
         return this->head->next->data;
+}
+
+template<typename T>
+Stack<T>::Stack() {
+
+    this->_size = 0;
+    this->head = new Node<T>;
 }
 
 #endif //INC_004_STACK_H
