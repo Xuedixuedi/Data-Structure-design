@@ -85,11 +85,11 @@ queue<string> getSuffix(string s) {
             string num = string(1, s[i]);
             int j = i + 1;
             for (; j < s.size(); ++j) {
-                if (!isNumber(s[j]) && s[i] != '.') {
+                if (!isNumber(s[j]) && s[j] != '.') {
                     break;
                 }
                 num = num + s[j];
-
+                i = j;
             }
             suffix.push(num);
         } else if (s[i] == '(') {
@@ -101,7 +101,6 @@ queue<string> getSuffix(string s) {
             }
             op->pop();//把左括号也出栈
         } else {
-
             if (op->empty() || op->top() == '(') {
                 op->push(s[i]);
             } else {
