@@ -19,7 +19,7 @@ template<typename T>
 class Stack {
 private:
     Node<T> *head;//头指针
-    int _size{};//栈的大小
+    int _size;//栈的大小
 
 public:
     Stack();
