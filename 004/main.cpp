@@ -8,7 +8,6 @@
 using namespace std;
 
 
-
 //思路：讲中缀表达式转化为后缀表达式 再用后缀表达式求和
 map<char, int> optionWeight = {
         {'+', 1},
@@ -17,8 +16,6 @@ map<char, int> optionWeight = {
         {'/', 2},
         {'%', 3},
         {'^', 4}
-
-
 };//操作符的优先级
 queue<string> getSuffix(string s);//将中缀表达式化为后缀表达式,返回后缀表达式
 string monoOpProcess(string s);//处理单目运算符,返回处理后的字符串
@@ -31,7 +28,7 @@ double getAns(queue<string> s);//计算表达式最终结果
 
 int main() {
     string s;//表达式
-    while(1){
+    while (1) {
         cout << "输入表达式：\n";
         cin >> s;
         s.pop_back();//删除等号做处理
@@ -42,9 +39,9 @@ int main() {
         cout << "是否继续(y/n)?" << endl;
         char op;
         cin >> op;
-        if(op == 'y'){
+        if (op == 'y') {
             continue;
-        }else if(op == 'n'){
+        } else if (op == 'n') {
             break;
         }
     }
@@ -64,7 +61,7 @@ string monoOpProcess(string s) {
             s.insert(i, 1, 0 + '0');
         } else if (!isNumber(s[i - 1]) && s[i - 1] != ')') {
             s.insert(i, "(0");
-            for (i = i + 3; i < s.size(); ++i) {
+            for (i = i + 3; i <= s.size(); ++i) {
                 if (isNumber(s[i]) || s[i] == '.') {
                     continue;
                 } else {
@@ -144,7 +141,12 @@ double calculate(double a, double b, string op) {
             return a / b;
         }
     } else if (op == "%") {
-        return (int(a) % int(b));
+        if (b == 0) {
+            cout << "除数不能为0，您输入的表达式有误" << endl;
+            exit(-1);
+        } else {
+            return (int(a) % int(b));
+        }
     } else if (op == "^") {
         return pow(a, b);
     }
@@ -158,7 +160,10 @@ double getAns(queue<string> s) {
         if (isnumber(temp[0])) {
             //当前取出是数字
             ans.push(atof(temp.c_str()));
-        } else {
+        } else if(temp == "(" ||temp ==")"){
+            cout << "您输入的表达式括号不匹配" << endl;
+            exit(-1);
+        } else{
             double b = ans.top();
             ans.pop();
             double a = ans.top();
