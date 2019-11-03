@@ -33,8 +33,15 @@ public:
 
 template<typename T>
 BinNode<T> *BinTree<T>::insertAsRoot(T t) {
-    this->_root = new BinNode(t);
-
+    this->_root = new BinNode<T>(t);
+    _size++;
 }
+
+template<typename T>
+BinNode<T> *BinTree<T>::insertAsLC(BinNode<T> *x, T t) {
+    x->insertAsLC(t);
+    _size++;
+}
+
 
 #endif //INC_006_BINTREE_H

@@ -11,17 +11,19 @@
 template<typename T>
 class BinNode {
 private:
-    T data;//数据
+    T _data;//数据
     BinNode *parent, *lChild, *rChild;//父亲 左孩子，右孩子
-    int height;//高度
+    int _height;//高度
 public:
-    BinNode() : parent(nullptr), lChild(nullptr), rChild(nullptr), height(0) {}
+    BinNode() : parent(nullptr), lChild(nullptr), rChild(nullptr), _height(0) {}
 
     BinNode(T data, BinNode<T> *p = nullptr, BinNode<T> *lc = nullptr,
             BinNode<T> *rc = nullptr, int h = 0) :
-            data(data), parent(p), lChild(lc), rChild(rc), height(h) {}
+            _data(data), parent(p), lChild(lc), rChild(rc), _height(h) {}
 
     int size();//以当前节点为根节点的后代规模
+    T data() { return this->_data; }//返回该节点的数据
+
     BinNode *insertAsLC(T t);
 
     BinNode *insertAsRC(T t);
