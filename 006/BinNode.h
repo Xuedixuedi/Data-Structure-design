@@ -12,9 +12,9 @@ template<typename T>
 class BinNode {
 private:
     T _data;//数据
-    BinNode *parent, *lChild, *rChild;//父亲 左孩子，右孩子
     int _height;//高度
 public:
+    BinNode *parent, *lChild, *rChild;//父亲 左孩子，右孩子
     BinNode() : parent(nullptr), lChild(nullptr), rChild(nullptr), _height(0) {}
 
     BinNode(T data, BinNode<T> *p = nullptr, BinNode<T> *lc = nullptr,
@@ -36,7 +36,7 @@ int BinNode<T>::size() {
 
 template<typename T>
 BinNode<T> *BinNode<T>::insertAsLC(T t) {
-    return this->rChild = new BinNode(t, this);
+    return this->lChild = new BinNode(t, this);
 }
 
 template<typename T>
