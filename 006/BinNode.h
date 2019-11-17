@@ -23,6 +23,7 @@ public:
 
     int size();//以当前节点为根节点的后代规模
     T data() { return this->_data; }//返回该节点的数据
+    void setData(T data1) { this->_data = data1; }
 
     BinNode *insertAsLC(T t);
 

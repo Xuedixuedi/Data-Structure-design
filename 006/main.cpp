@@ -12,6 +12,7 @@ BinTree<string> *initFamily();//建立家谱
 void completeFamily(BinTree<string> *tree);//完善家谱
 void addMember(BinTree<string> *tree);//添加成员
 void disbandLocalFamily(BinTree<string> *tree);//解散局部家庭
+void changeName(BinTree<string> *tree);//修改某个成员的姓名
 
 int main() {
     beginShow();
@@ -35,6 +36,10 @@ int main() {
             }
             case 'C': {
                 disbandLocalFamily(family);
+                break;
+            }
+            case 'D': {
+                changeName(family);
                 break;
             }
         }
@@ -98,7 +103,7 @@ void addMember(BinTree<string> *tree) {
     cout << "请输入要添加儿子（或女儿）的人的姓名： ";
     string name, child;
     cin >> name;
-    cout << "请输入" << name << "新添加的儿子（或女儿）的姓名: ";
+    cout << "请输入" << name << "新添加的儿子（或女儿）的姓名: ";//todo:应该在这里就判断name是否存在在子🌲
     cin >> child;
     auto p = tree->search(name);
     auto p0 = p;
@@ -120,5 +125,19 @@ void disbandLocalFamily(BinTree<string> *tree) {
     string name;
     cin >> name;
     cout << "要解散家庭的人是：" << name << endl;
+    cout << name << "的第一代子孙是: ";
+    auto p = tree->search(name);
+    tree->showChild(p);//todo:暂时写成只输出子一代（又方便又看上去符合题目要求先不管了cnmd）
+    tree->remove(p);
+}
 
+void changeName(BinTree<string> *tree) {
+    cout << "请输入要更改姓名的人目前的姓名：";
+    string formerName, name;
+    cin >> formerName;
+    auto p = tree->search(formerName);
+    cout << "请输入更改后的姓名： ";
+    cin >> name;
+    p->setData(name);
+    cout << formerName << "已更名为" << name << endl;
 }

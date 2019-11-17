@@ -7,6 +7,7 @@
 
 #include "BinNode.h"
 #include <stack>
+#include <queue>
 
 //左长子，右兄弟法
 //用二叉树实现家谱储存
@@ -31,7 +32,9 @@ public:
     BinNode<T> *insertAsLC(BinNode<T> *x, T t);//作为x节点的左孩子插入，data=t
     BinNode<T> *insertAsRC(BinNode<T> *x, T t);//作为x节点的右孩子插入，data=t
     BinNode<T> *search(T t);//查找内容为t的某个元素(使用前序遍历）
-    void showChild(BinNode<T> *x);//输出这个节点的所有子一代
+
+    std::queue<BinNode<T> *> showChild(BinNode<T> *x);//输出这个节点的所有子一代,并用队列存储所有子一代
+    void remove(BinNode<T> *p);//解散data为t的子🌲及他自身
 };
 
 template<typename T>
@@ -61,31 +64,48 @@ BinNode<T> *BinTree<T>::search(T t) {
         if (p->data() == t) {
             return p;
         } else {
-            if (p != nullptr) {
-                s.push(p);
-                p = p->lChild;
-            } else {
+            s.push(p);
+            p = p->lChild;
+            while (p == nullptr) {
                 p = s.top();
                 p = p->rChild;
                 s.pop();
             }
         }
-    }
 
+    }
 }
 
 template<typename T>
-void BinTree<T>::showChild(BinNode<T> *x) {
+std::queue<BinNode<T> *> BinTree<T>::showChild(BinNode<T> *x) {
+    std::queue<BinNode<T> *> child;
     if (x->lChild != nullptr) {
         std::cout << x->lChild->data() << "  ";
+        child.push(x->lChild);
     } else {
         std::cout << "他没有子代" << std::endl;
     }
     while (x->rChild != nullptr) {
+        child.push(x->rChild);
         std::cout << x->rChild->data() << "  ";
         x = x->rChild;
     }
     std::cout << std::endl;
+    return child;
+}
+
+template<typename T>
+void BinTree<T>::remove(BinNode<T> *p) {
+    if (p == nullptr) {
+        return;
+    }
+    if (p->lChild != nullptr) {
+        remove(p->lChild);
+    }
+    if (p->rChild != nullptr) {
+        remove(p->rChild);
+    }
+    delete p;
 }
 
 #endif //INC_006_BINTREE_H
