@@ -13,10 +13,16 @@ int main() {
         q->push(num);
     }
 
-    for (int i = 0; i < times; i++) {
-        auto p = q->_header->next;
-        cout << p->_data << ' ';
-        p = p->next;
+    int tempAns = 0;
+    while(q->size()>1){
+        int a = q->top();
+        q->pop();
+        int b = q->top();
+        q->pop();
+        tempAns += a+b;
+        q->push(a+b);
     }
+    cout << tempAns;
+
     return 0;
 }

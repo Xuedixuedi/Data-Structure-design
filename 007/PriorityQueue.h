@@ -16,14 +16,12 @@
 struct Node {
     int _data;//数据
     Node *next;
+    Node *pre;
 
     Node() = default;
 
-    Node(int t);
+    explicit Node(int t);
 
-    bool operator<=(const Node *a) {
-        return _data < a->_data || _data == a->_data;
-    }
 };
 
 Node::Node(int t) {
@@ -45,13 +43,15 @@ public:
 
     int top();//返回该队列优先级最高的元素
     void pop();//弹出队列优先级最高的元素
-    void push(int t);//放入元素（并排序,从小到大
+    void push(int t);//放入元素
+    void sort();
 };
 
 PriorityQueue::PriorityQueue() {
     _header = new Node;
     _trailer = new Node;
     _header->next = _trailer;
+    _trailer->pre = _header;
     _size = 0;
 }
 
@@ -68,6 +68,7 @@ void PriorityQueue::pop() {
     if (!empty()) {
         auto p = this->_header->next;
         _header->next = p->next;
+        p->next->pre = _header;
         delete p;
         _size--;
         return;
@@ -79,27 +80,40 @@ void PriorityQueue::pop() {
 
 void PriorityQueue::push(int t) {
     auto p = new Node(t);
-    if (this->empty()) {
-        p->next = _header->next;
-        this->_header->next = p;
+    auto q = _header->next;
+    while (q != _trailer) {
+        if (t <= q->_data) {
+            p->next = q;
+            p->pre = q->pre;
+            q->pre->next = p;
+            q->pre = p;
+            _size++;
+            break;
+        }
+        q = q->next;
+    }
+    if (q == _trailer) {
+        p->next = q;
+        p->pre = q->pre;
+        q->pre->next = p;
+        q->pre = p;
         _size++;
-        return;
-    } else {
-        auto it = this->_header;//从第一个数据开始
-        while (it->next != _trailer) {
-            if (p <= it->next) {
-                p->next = it->next;
-                it->next = p;
-                _size++;
-                return;
-            } else {
-                it = it->next;
+    }
+}
+
+void PriorityQueue::sort() {
+    auto p = _header->next;
+    auto q = p->next;
+    int temp;
+    while (p != _trailer) {
+        for (q = p->next; q != _trailer; q = q->next) {
+            if (q->_data < p->_data) {
+                temp = p->_data;
+                p->_data = q->_data;
+                q->_data = temp;
             }
         }
-        p->next = it->next;
-        it->next = p;
-        _size++;
-        return;
+        p = p->next;
     }
 }
 
