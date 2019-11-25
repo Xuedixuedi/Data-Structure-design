@@ -11,10 +11,11 @@
 
 class Graph {
 private:
-    int _size;//顶点数
     char *_name;//储存顶点名称的数组
     int **_matrix;//邻接矩阵表示
 public:
+    int _size;//顶点数
+    Graph() = default;
     Graph(int size, char *name, int **matrix = nullptr) :
             _size(size), _name(name), _matrix(matrix) {}
 

@@ -1,20 +1,29 @@
 #include <iostream>
 #include <iomanip>
-//using std::setw;
+#include "Graph.h"
+
 using namespace std;
 
 void menu();
 
-void init();//初始化图
+Graph *init();//初始化图
+void addSlide(Graph *grid);
 
 int main() {
     menu();
     cout << "Please select an operation: " << endl;
     char op;
     cin >> op;
+    Graph *grid;
     switch (op) {
         case 'A': {
-            init();
+            grid = init();
+            cout << endl;
+            break;
+        }
+        case 'B': {
+
+            cout << endl;
             break;
         }
     }
@@ -32,9 +41,9 @@ void menu() {
     cout << "====================================================" << endl;
 }
 
-void init() {
+Graph *init() {
     cout << "Please enter the number of vertex: ";
-    int size;
+    int size = 0;
     cin >> size;
     cout << "Please enter the names of the vertexes in order: ";
     char name;
@@ -43,5 +52,18 @@ void init() {
         cin >> name;
         namelist[i] = name;
     }
+    auto grid = new Graph(size, namelist);
+    return grid;
+}
 
+void addSlide(Graph *grid) {
+    char vertex1, vertex2;
+    int slide;
+    while (true) {
+        cout << "请输入两个顶点及边： ";
+        cin >> vertex1 >> vertex2 >> slide;
+        if (vertex1 == '?') {
+            break;
+        }
+    }
 }
