@@ -26,6 +26,10 @@ int main() {
             break;
         }
         switch (op) {
+            default: {
+                cout << "您的输入有误，请重新输入" << endl;
+                break;
+            }
             case 'A' : {
                 completeFamily(family);
                 break;
@@ -41,6 +45,14 @@ int main() {
             case 'D': {
                 changeName(family);
                 break;
+            }
+            case 'S': {
+                cout << "请输入要查看子一代的节点名称:";
+                string name;
+                cin >> name;
+                auto p = family->search(name);
+                cout << name << "的子一代是：";
+                family->showChild(p);
             }
         }
     }
@@ -76,10 +88,15 @@ void completeFamily(BinTree<string> *tree) {
     cout << "请输入要建立家庭的人的姓名：";
     string name;
     cin >> name;
+    auto p = tree->search(name);
+    while (p == nullptr) {
+        cout << "您输入的姓名不在家谱中,请您重新输入：";
+        cin >> name;
+        p = tree->search(name);
+    }
     cout << "请输入" << name << "的儿女数：";
     int num;
     cin >> num;
-    auto p = tree->search(name);
     auto p0 = p;//记录该节点位置
     while (num <= 0) {
         cout << "您输入的数字有误，请重新输入" << endl;
@@ -103,7 +120,11 @@ void addMember(BinTree<string> *tree) {
     cout << "请输入要添加儿子（或女儿）的人的姓名： ";
     string name, child;
     cin >> name;
-    cout << "请输入" << name << "新添加的儿子（或女儿）的姓名: ";//todo:应该在这里就判断name是否存在在子🌲
+    while (tree->search(name) == nullptr) {
+        cout << "您输入的姓名不在家谱中,请您重新输入：";
+        cin >> name;
+    }
+    cout << "请输入" << name << "新添加的儿子（或女儿）的姓名: ";
     cin >> child;
     auto p = tree->search(name);
     auto p0 = p;
@@ -124,6 +145,10 @@ void disbandLocalFamily(BinTree<string> *tree) {
     cout << "请输入要解散家庭的人的姓名： ";
     string name;
     cin >> name;
+    while (tree->search(name) == nullptr) {
+        cout << "您输入的姓名不在家谱中,请您重新输入：";
+        cin >> name;
+    }
     cout << "要解散家庭的人是：" << name << endl;
     cout << name << "的第一代子孙是: ";
     auto p = tree->search(name);
@@ -136,6 +161,11 @@ void changeName(BinTree<string> *tree) {
     string formerName, name;
     cin >> formerName;
     auto p = tree->search(formerName);
+    while (p == nullptr) {
+        cout << "您输入的姓名不在家谱中,请您重新输入：";
+        cin >> formerName;
+        p = tree->search(formerName);
+    }
     cout << "请输入更改后的姓名： ";
     cin >> name;
     p->setData(name);

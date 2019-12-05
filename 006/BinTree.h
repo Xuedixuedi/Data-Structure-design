@@ -66,7 +66,7 @@ BinNode<T> *BinTree<T>::search(T t) {
         } else {
             s.push(p);
             p = p->lChild;
-            while (p == nullptr) {
+            while (p == nullptr && !s.empty()) {
                 p = s.top();
                 p = p->rChild;
                 s.pop();
@@ -74,6 +74,7 @@ BinNode<T> *BinTree<T>::search(T t) {
         }
 
     }
+    return nullptr;
 }
 
 template<typename T>
@@ -106,6 +107,7 @@ void BinTree<T>::remove(BinNode<T> *p) {
         remove(p->rChild);
     }
     delete p;
+    return;
 }
 
 #endif //INC_006_BINTREE_H
