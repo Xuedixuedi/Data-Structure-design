@@ -25,7 +25,6 @@ public:
     int size() { return _size; }
 
     int front();//返回头节点的值
-    int back();//返回尾节点
     void pop();//头元素出队
     void push(int t);//元素入队
     bool empty() { return !_size; };
@@ -56,10 +55,6 @@ void Queue::push(int t) {
 
 int Queue::front() {
     return head->next->data;
-}
-
-int Queue::back() {
-    return trail->pre->data;
 }
 
 void Queue::pop() {

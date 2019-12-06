@@ -13,107 +13,100 @@
 //然后取最小的两个相加，得到的结果放入队列接着排队
 //直到输出结果 嘿嘿！
 
-struct Node {
-    int _data;//数据
-    Node *next;
-    Node *pre;
-
-    Node() = default;
-
-    explicit Node(int t);
-
-};
-
-Node::Node(int t) {
-    this->_data = t;
-    next = nullptr;
-}
 
 class PriorityQueue {
 private:
-    int _size;//规模
-public:
-    Node *_header;//头哨兵
-    Node *_trailer;//尾哨兵
-    PriorityQueue();
+    int _size;
+    int *_data;//层序遍历的最小堆
 
-    bool empty() { return !_size; }
+    int parent(int i) { return ((i - 1) >> 1); }//返回下标为i的节点的父节点
+    int lChild(int i) {
+        return (1 + (i << 1));
+    }
+
+    int rChild(int i) {
+        return ((1 + i) << 1);
+    }
+
+    bool inHeap(int i) { return i >= 0 && i < _size; }
+
+    void swap(int i, int j);//交换
+
+public:
+    PriorityQueue() {
+        _size = 0;
+        _data = nullptr;
+    };
+
+    explicit PriorityQueue(int size) {
+        _size = size;
+        _data = new int[size];
+        _data[size] = {0};
+    };
 
     int size() { return _size; }
 
-    int top();//返回该队列优先级最高的元素
-    void pop();//弹出队列优先级最高的元素
-    void push(int t);//放入元素
-    void sort();
+    int top() { return _data[0]; };
+
+    void pop();//弹出顶部元素
+
+    void insert(int n);//插入元素
 };
 
-PriorityQueue::PriorityQueue() {
-    _header = new Node;
-    _trailer = new Node;
-    _header->next = _trailer;
-    _trailer->pre = _header;
-    _size = 0;
+void PriorityQueue::swap(int i, int j) {
+    int temp;
+    temp = _data[i];
+    _data[i] = _data[j];
+    _data[j] = temp;
 }
 
-int PriorityQueue::top() {
-    if (!empty()) {
-        return this->_header->next->_data;
-    } else {
-        std::cout << "该队列为空" << std::endl;
-        exit(-1);
+void PriorityQueue::insert(int n) {
+    if (_size == 0) {
+        _data[0] = n;
+        _size++;
+        return;
     }
+    _data[_size] = n;
+    int i = _size;
+    _size++;
+    while (i > 0) {
+        int j = parent(i);//j是i的父亲节点的秩
+        if (_data[j] > _data[i]) {
+            swap(i, j);
+            i = j;
+        } else {
+            break;
+        }
+    }
+
 }
 
 void PriorityQueue::pop() {
-    if (!empty()) {
-        auto p = this->_header->next;
-        _header->next = p->next;
-        p->next->pre = _header;
-        delete p;
-        _size--;
-        return;
-    } else {
-        std::cout << "该队列为空" << std::endl;
-        exit(-1);
-    }
-}
-
-void PriorityQueue::push(int t) {
-    auto p = new Node(t);
-    auto q = _header->next;
-    while (q != _trailer) {
-        if (t <= q->_data) {
-            p->next = q;
-            p->pre = q->pre;
-            q->pre->next = p;
-            q->pre = p;
-            _size++;
+    swap(0, _size - 1);
+    _data[_size - 1] = 0;
+    _size--;
+    int i = 0;
+    while (inHeap(i)) {
+        int j = lChild(i);
+        int k = rChild(i);//k一定>j
+        int t;
+        if (inHeap(k)) {
+            if (_data[j] < _data[k]) {
+                t = j;
+            } else {
+                t = k;
+            }
+        } else if (inHeap(j)) {
+            t = j;
+        } else {
             break;
         }
-        q = q->next;
-    }
-    if (q == _trailer) {
-        p->next = q;
-        p->pre = q->pre;
-        q->pre->next = p;
-        q->pre = p;
-        _size++;
-    }
-}
-
-void PriorityQueue::sort() {
-    auto p = _header->next;
-    auto q = p->next;
-    int temp;
-    while (p != _trailer) {
-        for (q = p->next; q != _trailer; q = q->next) {
-            if (q->_data < p->_data) {
-                temp = p->_data;
-                p->_data = q->_data;
-                q->_data = temp;
-            }
+        if (_data[t] < _data[i]) {
+            swap(i, t);
+            i = t;
+        } else {
+            break;
         }
-        p = p->next;
     }
 }
 

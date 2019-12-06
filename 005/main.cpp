@@ -8,6 +8,10 @@ using namespace std;
 int main() {
     int time;//人数
     cin >> time;
+    while (time < 1) {
+        cout << "您输入的数字应大于或等于1，请重新输入：";
+        cin >> time;
+    }
     Queue bankA, bankB;
     while (time--) {
         int num;
