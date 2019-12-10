@@ -36,7 +36,7 @@ int *merge(int *input, int start, int mid, int end, int *output, int &swapTime);
 
 int *mergeSort(int *raw, int start, int end, int *buffer, int &swapTime);
 
-int max(int *raw, int len);
+int max(const int *raw, int len);
 
 int countSort(int *raw, int len, int bit);
 
@@ -143,11 +143,11 @@ void start() {
     cout << "**          1. Bubble Sort          \t**" << endl;
     cout << "**          2. Selection Sort          \t**" << endl;
     cout << "**          3. Insertion Sort       \t**" << endl;
-    cout << "**          4. Shell Sort          \t**" << endl;
-    cout << "**          5. Quick Sort          \t**" << endl;
-    cout << "**          6. Heap Sort          \t**" << endl;
-    cout << "**          7. Merge Sort          \t**" << endl;
-    cout << "**          8. Radix Sort          \t**" << endl;
+    cout << "**          4. Shell Sort            \t**" << endl;
+    cout << "**          5. Quick Sort            \t**" << endl;
+    cout << "**          6. Heap Sort            \t**" << endl;
+    cout << "**          7. Merge Sort            \t**" << endl;
+    cout << "**          8. Radix Sort            \t**" << endl;
     cout << "**          9. Exit System            \t**" << endl;
     cout << "==========================================" << endl;
     cout << endl;
@@ -387,7 +387,7 @@ int *mergeSort(int *raw, int start, int end, int *buffer, int &swapTime) {
     return raw;
 }
 
-int max(int *raw, int len) {
+int max(const int *raw, int len) {
     int max = raw[0];
     for (int i = 1; i < len; ++i) {
         if (raw[i] > max) {
