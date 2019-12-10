@@ -8,7 +8,9 @@ void menu();
 
 Graph *init();  //初始化图
 void addSide(Graph *grid);
+
 void minTree(Graph *grid);
+
 void showTree(Graph *grid);
 
 int main() {
@@ -23,6 +25,10 @@ int main() {
             break;
         }
         switch (op) {
+            default: {
+                cout << "The operation code you entered is incorrect. Please re-enter!" << endl;
+                break;
+            }
             case 'A': {
                 grid = init();
                 cout << endl;
@@ -92,6 +98,7 @@ Graph *init() {
     }
 
     auto grid = new Graph(size, namelist, matrix);
+//    grid->printMatrix();
     return grid;
 }
 
@@ -107,7 +114,7 @@ void addSide(Graph *grid) {
             grid->initMatrix(vertex1, vertex2, side);
         }
     }
-    // grid->printMatrix();
+//     grid->printMatrix();
 }
 
 void minTree(Graph *grid) {

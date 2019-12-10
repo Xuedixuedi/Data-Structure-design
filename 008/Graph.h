@@ -60,50 +60,12 @@ void Graph::initMatrix(char vertex1, char vertex2, int side) {
 void Graph::printMatrix() {
     for (int i = 0; i < _size; ++i) {
         for (int j = 0; j < _size; ++j) {
-            std::cout << _matrix[i][j] << ' ';
+            std::cout << _matrix[i][j] <<"\t\t";
         }
         std::cout << '\n';
     }
 }
 
-// void Graph::prim(char vertex) {
-//     int s;
-//     int sum = 0;
-//     for (int i = 0; i < _size; ++i) {
-//         if (_name[i] == vertex) {
-//             s = i;
-//             break;
-//         }
-//     }
-//     _score[s] = 0;
-//     for (int i = 0; i < _size; ++i) {
-//         int u = -1;  // u使得_score[u]最小
-//         int min = INT_MAX;
-//         for (int j = 0; j < _size; ++j) {
-//             if (_visit[j] == false && _score[j] < min) {
-//                 min = _score[j];
-//                 u = j;
-//                 _parent[u] = i;
-//             }
-//         }
-//         if (u == -1) {
-//             exit(-1);
-//         }
-//         _visit[u] = true;
-//         sum += _score[u];
-//         for (int v = 0; v < _size; ++v) {
-//             if (_visit[v] == false && _matrix[u][v] < INT_MAX &&
-//                 _matrix[u][v] < _score[v]) {
-//                 _score[v] = _matrix[u][v];
-//                 _parent[v] = u;
-//             }
-//         }
-//     }
-//     for (int i = 0; i < _size; ++i) {
-//         std::cout << _parent[i] << ' ';
-//     }
-//     std::cout << sum;
-// }
 
 void Graph::prim(char vertex) {
     //维护三个东西：selected minDist parent
