@@ -135,6 +135,7 @@ Stack<Point> Maze::dfs(int x, int y) {
         s.pop();
         if (s.empty()) {
             cout << "No Answer" << endl;
+            exit(0);
         } else {
             p = Point(s.top().x, s.top().y);
             i = 0;
