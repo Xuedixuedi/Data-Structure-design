@@ -1,0 +1,8 @@
+The 7 semester's curriculum:
+英语|英语|英语|    |
+PowerBuilder|PowerBuilder|PowerBuilder|    |
+ASP程序设计|ASP程序设计|ASP程序设计|    |
+JSP程序设计|JSP程序设计|JSP程序设计|    |
+VC++|VC++|VC++|    |
+英语|英语|PowerBuilder|PowerBuilder|
+ASP程序设计|ASP程序设计|JSP程序设计|JSP程序设计|

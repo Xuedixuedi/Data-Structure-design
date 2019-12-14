@@ -1,0 +1,4 @@
+The 8 semester's curriculum:
+英语|英语|英语|    |VB.net|VB.net|VB.net|    |
+Delphi|Delphi|Delphi|    |C++Builder|C++Builder|C++Builder|    |
+英语|英语|VB.net|VB.net|Delphi|Delphi|C++Builder|C++Builder|

@@ -1,0 +1,8 @@
+The 6 semester's curriculum:
+数据通信|数据通信|英语|英语|
+英语|    |C#.net|C#.net|
+C#.net|    |面向对象程序设计|面向对象程序设计|
+面向对象程序设计|    |Java|Java|
+Java|    |数据通信|数据通信|
+英语|英语|C#.net|C#.net|
+数据通信|数据通信|

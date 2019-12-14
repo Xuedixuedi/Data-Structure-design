@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <stdlib.h>
 #include <vector>
 #include "Graph.h"
 
@@ -8,7 +9,11 @@ using namespace std;
 
 vector<Course> readFile();//读取文件并转化为vector<Course>
 void arrangeClass(int sem, Graph *gr);//sem学期的课表
+void outPut(int sem, vector<Course> ls);
 
+bool cmp(Course a, Course b) {
+    return a._time > b._time;
+}
 
 int main() {
     vector<Course> courses;
@@ -70,6 +75,68 @@ vector<Course> readFile() {
     return courses;//size
 }
 
+
+//输出文件：
+void outPut(int sem, vector<Course> ls) {
+    string xx = "../out0.txt";
+    xx[6] = static_cast<char> (sem);
+    auto str = xx.c_str();
+    ofstream out;
+    out.open(str);
+    out << "The " << sem << " semester's curriculum:" << endl;
+
+    //我想先把ls按照课时数排一排
+    sort(ls.begin(), ls.end(), cmp);
+    for (int i = 0; i < ls.size(); ++i) {
+        cout << ls[i]._time << ' ';
+    }
+
+    int classtime[ls.size()];//对应课程的课时
+    vector<Course> schedual;
+    for (int i = 0; i < ls.size(); ++i) {
+        classtime[i] = ls[i]._time;
+    }
+
+    for (int k = 0; k < 3; ++k) {
+        for (int i = 0; i < ls.size(); ++i) {
+            if (classtime[i]) {
+                if (classtime[i] % 2) {
+                    //奇数情况
+                    schedual.push_back(ls[i]);
+                    schedual.push_back(ls[i]);
+                    schedual.push_back(ls[i]);
+                    classtime[i] -= 3;
+                } else {
+                    //偶数情况
+                    schedual.push_back(ls[i]);
+                    schedual.push_back(ls[i]);
+                    classtime[i] -= 2;
+                }
+            }
+        }
+    }
+
+    int hd = 4;
+    int num = 0;
+    string temp1;
+
+    for (int i = 0; i < schedual.size(); ++i) {
+        num++;
+        out << schedual[i]._name << '|';
+        if (schedual[i]._number != schedual[i + 1]._number && schedual[i]._number == schedual[i - 2]._number) {
+            num++;
+            out << "    |";
+        }
+        if (num == 4) {
+            num = 0;
+            out << endl;
+        }
+    }
+
+    out.close();
+
+}
+
 void arrangeClass(int sem, Graph *gr) {
     int ttime = 0;//这些课程的总时间
     vector<Course> list;
@@ -87,56 +154,12 @@ void arrangeClass(int sem, Graph *gr) {
                 list.push_back(*it);
                 it->_semester = sem;
             }
-            if (ttime > 30) {
+            if (ttime > 20) {
                 break;
             }
         }
     }
-//    for (auto it = list.begin(); it != list.end(); ++it) {
-//        cout << it->_number << ' ';
-//    }
-    ofstream out;
-    out.open("../out.txt");
 
-    out << "The" << sem << "semester's curriculum:" << endl;
-    int classtime[list.size()];//对应课程的课时
-    vector<Course> schedual;
-    for (int i = 0; i < list.size(); ++i) {
-        classtime[i] = list[i]._time;
-    }
-    for (int k = 0; k < 3; ++k) {
-        for (int i = 0; i < list.size(); ++i) {
-            if (classtime[i]) {
-                if (classtime[i] % 2) {
-                    //奇数情况
-                    schedual.push_back(list[i]);
-                    schedual.push_back(list[i]);
-                    schedual.push_back(list[i]);
-                    classtime[i] -= 3;
-                } else {
-                    //偶数情况
-                    schedual.push_back(list[i]);
-                    schedual.push_back(list[i]);
-                    classtime[i] -= 2;
-                }
-            }
-        }
-    }
-    int hd = 4;
-    int num = 0;
-    string temp1;
+    outPut(sem, list);
 
-    for (int i = 0; i < schedual.size(); ++i) {
-        num++;
-        out << schedual[i]._name << '|';
-        if (schedual[i]._number != schedual[i + 1]._number && schedual[i]._number == schedual[i - 2]._number) {
-            num++;
-            out << "    |";
-        }
-        if (num == 4) {
-            num = 0;
-            out << endl;
-        }
-    }
-    out.close();
 }
