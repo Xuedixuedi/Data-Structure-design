@@ -113,6 +113,9 @@ std::vector<Course> Graph::topologicalSort() {
         }
     }
     _classlist = ans;
+    for (auto it = ans.begin(); it != ans.end(); ++it) {
+        std::cout << it->_name << ' ';
+    }
     return ans;
 }
 

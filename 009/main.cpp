@@ -70,7 +70,6 @@ vector<Course> readFile() {
         }
     }
 
-
     ifs.close();
     return courses;//size
 }
@@ -88,7 +87,7 @@ void outPut(int sem, vector<Course> ls) {
     //我想先把ls按照课时数排一排
     sort(ls.begin(), ls.end(), cmp);
     for (int i = 0; i < ls.size(); ++i) {
-        cout << ls[i]._time << ' ';
+//        cout << ls[i]._time << ' ';
     }
 
     int classtime[ls.size()];//对应课程的课时
