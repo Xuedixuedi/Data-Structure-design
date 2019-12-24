@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <vector>
+#include <stack>
 
 struct Course {
     std::string _number;//课程编号
@@ -42,7 +43,9 @@ public:
     int _matrix[29][29];       //邻接矩阵表示
     int _size;           //course name数
     int _vertexes;  //真实的顶点数
+    std::vector<int> _inDegree;//入度
     std::vector<Course> _classlist;//拓扑排序后的课程顺序
+    std::stack<int> stk; //入度为0的点
     Graph() = default;
 
     Graph(std::vector<Course> course) {
@@ -53,7 +56,7 @@ public:
 
     void initMatrix();
 
-    bool findInDegree(Course co);//查找入度为0的顶点
+    void findInDegree();//查找各个顶点的入度
     std::vector<Course> topologicalSort();
 };
 
@@ -86,33 +89,35 @@ void Graph::initMatrix() {
     }
 }
 
-bool Graph::findInDegree(Course co) {
+void Graph::findInDegree() {
     for (int i = 0; i < _classname.size(); ++i) {
-        if (_classname[i]._number == co._number) {
-            if (_classname[i]._degree == 0) {
-                return true;
-            } else {
-                return false;
-            }
+//        std::cout << _classname[i]._degree << " ";
+        _inDegree.push_back(_classname[i]._degree);
+        if (_inDegree[i] == 0) {
+            stk.push(i);
         }
+
     }
 }
 
 std::vector<Course> Graph::topologicalSort() {
     std::vector<Course> ans;
-    for (int i = 0; i < _classname.size(); ++i) {
-        if (findInDegree(_classname[i])) {
-            //把入度为0的节点放入
-            ans.push_back(_classname[i]);
-            //把这个点的后继节点入度-1
-            for (int j = 0; j < _classname.size(); ++j) {
-                if (_matrix[i][j] == 1) {
-                    _classname[j]._degree--;
+    findInDegree();
+    int v;//下标
+    while (!stk.empty()){
+        v = stk.top();
+        stk.pop();
+        for(int i = 0;i < _classname.size();++i){
+            if(_matrix[v][i] == 1){
+                _inDegree[i] --;
+                if(_inDegree[i] == 0){
+                    stk.push(i);
                 }
             }
         }
+        ans.push_back(_classname[v]);
     }
-    _classlist = ans;
+        _classlist = ans;
     for (auto it = ans.begin(); it != ans.end(); ++it) {
         std::cout << it->_name << ' ';
     }

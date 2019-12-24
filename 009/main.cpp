@@ -121,12 +121,15 @@ void outPut(int sem, vector<Course> ls) {
 
     for (int i = 0; i < schedual.size(); ++i) {
         num++;
-        out << schedual[i]._name << '|';
+        out << schedual[i]._name << "\t|";
         if (schedual[i]._number != schedual[i + 1]._number && schedual[i]._number == schedual[i - 2]._number) {
             num++;
-            out << "    |";
+            out << "  \t|";
         }
         if (num == 4) {
+            out << "午休\t|";
+        }
+        if (num == 8) {
             num = 0;
             out << endl;
         }

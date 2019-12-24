@@ -64,11 +64,11 @@ Node *Node::insertAsNext(Node *t) {
 }
 
 void Node::getInform() {
-    std::cout << this->_number << ' '
-              << this->_name << ' '
-              << this->_sex << ' '
-              << this->_age << ' '
-              << this->_type << ' '
+    std::cout << this->_number << " \t"
+              << this->_name << " \t"
+              << this->_sex << " \t"
+              << this->_age << " \t"
+              << this->_type << " \t"
               << '\n';
 }
 

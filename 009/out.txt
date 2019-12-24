@@ -1,7 +1,4 @@
 The 8 semester's curriculum:
-英语|英语|英语|    |
-VB.net|VB.net|VB.net|    |
-Delphi|Delphi|Delphi|    |
-C++Builder|C++Builder|C++Builder|    |
-英语|英语|VB.net|VB.net|
-Delphi|Delphi|C++Builder|C++Builder|
+英语	|英语	|英语	|  	|午休	|编译原理	|编译原理	|编译原理	|  	|
+微机原理	|微机原理	|算法设计	|算法设计	|午休	|单片机应用	|单片机应用	|单片机应用	|  	|
+英语	|英语	|编译原理	|编译原理	|午休	|微机原理	|微机原理	|算法设计	|算法设计	|

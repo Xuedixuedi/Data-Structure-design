@@ -1,8 +1,5 @@
 The 7 semester's curriculum:
-英语|英语|英语|    |
-PowerBuilder|PowerBuilder|PowerBuilder|    |
-ASP程序设计|ASP程序设计|ASP程序设计|    |
-JSP程序设计|JSP程序设计|JSP程序设计|    |
-VC++|VC++|VC++|    |
-英语|英语|PowerBuilder|PowerBuilder|
-ASP程序设计|ASP程序设计|JSP程序设计|JSP程序设计|
+英语	|英语	|英语	|  	|午休	|计算机网络	|计算机网络	|计算机网络	|  	|
+数据库原理	|数据库原理	|数据库原理	|  	|午休	|操作系统原理	|操作系统原理	|面向对象程序设计	|面向对象程序设计	|
+面向对象程序设计	|  	|英语	|英语	|午休	|计算机网络	|计算机网络	|数据库原理	|数据库原理	|
+操作系统原理	|操作系统原理	|
