@@ -78,7 +78,7 @@ vector<Course> readFile() {
 //输出文件：
 void outPut(int sem, vector<Course> ls) {
     string xx = "../out0.txt";
-    xx[6] = static_cast<char> (sem);
+    xx[6] = static_cast<char> (sem)+96;
     auto str = xx.c_str();
     ofstream out;
     out.open(str);
