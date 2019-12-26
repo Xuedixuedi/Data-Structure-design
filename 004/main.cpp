@@ -152,7 +152,7 @@ double calculate(double a, double b, string op) {
     }
 }
 
-(double getAns(queue<string> s) {
+double getAns(queue<string> s) {
     Stack<double> ans;//结果栈
     while (!s.empty()) {
         string temp = s.front();
@@ -172,4 +172,4 @@ double calculate(double a, double b, string op) {
         }
     }
     return ans.top();
-})
+}
